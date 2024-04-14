@@ -16,12 +16,11 @@ public class SecurityConfig {
 @Bean
     public SecurityFilterChain defaultFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .csrf(csrf-> csrf.disable())
-                .authorizeHttpRequests(auth-> auth.requestMatchers("/registrar").permitAll()
-                .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
-                .build();
+            .csrf(csrf-> csrf.disable())
+            .authorizeHttpRequests(auth-> auth.anyRequest().permitAll()) // Permite acesso a todos os endpoints sem autenticação
+            .httpBasic(Customizer.withDefaults())
+            .formLogin(Customizer.withDefaults())
+            .build();
     }
 
 @Bean
