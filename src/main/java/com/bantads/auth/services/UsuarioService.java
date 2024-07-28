@@ -20,13 +20,23 @@ public class UsuarioService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenHelper jwtTokenHelper;
 
-    public ResponseEntity criarOuAtualizarUsuario(Usuario usuario) {
-        if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Usuário já cadastrado.");
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-        usuarioRepository.save(usuario);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+    public ResponseEntity<String> criarOuAtualizarUsuario(Usuario usuario) {
+        Optional<Usuario> usuarioExistente = usuarioRepository.findByUsuario(usuario.getUsuario());
+
+        if (usuarioExistente.isPresent()) {
+            Usuario usuarioAtualizado = usuarioExistente.get();
+            usuarioAtualizado.setUsuario(usuario.getUsuario());
+            usuarioAtualizado.setSenha(passwordEncoder.encode(usuario.getSenha()));
+            usuarioAtualizado.setPerfil(usuario.getPerfil());
+            usuarioRepository.save(usuarioAtualizado);
+            return ResponseEntity.ok("Usuário atualizado com sucesso.");
+        } else {
+            usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+            usuarioRepository.save(usuario);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com sucesso.");
+        }
     }
+
 
     public ResponseEntity autenticar(Autenticacao autenticacao) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findByUsuario(autenticacao.getUsuario());
