@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Component
 public class JwtTokenHelper {
-    private String secretKey = "Zc)#>Pz0>qx>3PYjcTlPqUiR*l!!u7slL!2"; 
+    private String secretKey = "Zc>Pz0>qx>3PYjcTlPqUiR*l!!u7slL!2";
     private long validityInMilliseconds = 36000000;
 
     public String createToken(Usuario usuario) {
