@@ -21,7 +21,7 @@ public class JwtTokenHelper {
 
         return Jwts.builder()
                 .claim("userId", usuario.getId())
-                .claim("role", usuario.getPerfil())
+                .claim("perfil", usuario.getPerfil())
                 .claim("gerenteId", usuario.getGerenteId())
                 .claim("contaId", usuario.getContaId())
                 .claim("clienteId", usuario.getClienteId())
