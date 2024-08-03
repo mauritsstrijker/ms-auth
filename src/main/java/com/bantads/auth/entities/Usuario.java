@@ -17,4 +17,7 @@ public class Usuario {
     private String usuario;
     private String senha;
     private String perfil;
+    private String gerenteId;
+    private String contaId;
+    private String clienteId;
 }

@@ -22,7 +22,10 @@ public class JwtTokenHelper {
         return Jwts.builder()
                 .claim("userId", usuario.getId())
                 .claim("role", usuario.getPerfil())
-                .setIssuedAt(now)
+                .claim("gerenteId", usuario.getGerenteId())
+                .claim("contaId", usuario.getContaId())
+                .claim("clienteId", usuario.getClienteId())
+                    .setIssuedAt(now)
                 .setExpiration(validity)
                 .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SignatureAlgorithm.HS256)
                 .compact();

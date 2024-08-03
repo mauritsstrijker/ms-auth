@@ -28,6 +28,9 @@ public class UsuarioService {
             usuarioAtualizado.setUsuario(usuario.getUsuario());
             usuarioAtualizado.setSenha(passwordEncoder.encode(usuario.getSenha()));
             usuarioAtualizado.setPerfil(usuario.getPerfil());
+            usuarioAtualizado.setGerenteId(usuario.getGerenteId());
+            usuarioAtualizado.setClienteId(usuario.getClienteId());
+            usuarioAtualizado.setContaId(usuario.getContaId());
             usuarioRepository.save(usuarioAtualizado);
             return ResponseEntity.ok("Usuário atualizado com sucesso.");
         } else {
