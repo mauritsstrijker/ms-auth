@@ -1,5 +1,6 @@
 package com.bantads.auth.services;
 
+import com.bantads.auth.dtos.AutenticarResponse;
 import com.bantads.auth.entities.Autenticacao;
 import com.bantads.auth.entities.Usuario;
 import com.bantads.auth.helpers.JwtTokenHelper;
@@ -49,7 +50,8 @@ public class UsuarioService {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha incorreta.");
             }
             String token = jwtTokenHelper.createToken(usuario);
-            return ResponseEntity.ok().body(token);
+            AutenticarResponse response = new AutenticarResponse(token);
+            return ResponseEntity.ok().body(response);
         }
             else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado.");

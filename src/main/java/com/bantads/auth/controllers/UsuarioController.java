@@ -36,7 +36,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/autenticar")
-    public ResponseEntity autenticar(@RequestBody Autenticacao autenticacao) {
+        public ResponseEntity autenticar(@RequestBody Autenticacao autenticacao) {
         try {
             return usuarioService.autenticar(autenticacao);
             }
